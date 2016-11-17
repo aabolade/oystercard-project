@@ -1,5 +1,6 @@
 require 'oyster_card'
 
+
 describe Oystercard do
   subject(:oyster) { described_class.new }
   let(:entry_station) { double :station }
@@ -11,7 +12,7 @@ describe Oystercard do
         expect(oyster.balance).to eq 0
       end
     end
-    
+
 
     context "topping up" do
 
@@ -40,6 +41,13 @@ describe Oystercard do
         expect(oyster.balance).to eq 5
       end
 
+      it 'it should deduct a minimum charge from the card' do
+        card = Oystercard.new
+        card.top_up(10)
+        card.touch_in('waterloo')
+        expect{card.touch_out('aldgate')}.to change(card, :balance).by -Oystercard::MINIMUM_CHARGE
+
+      end
     end
 
 
@@ -69,13 +77,6 @@ describe Oystercard do
       it 'should show whether in_journey?' do
         expect(oyster.in_journey?).to be false
       end
-
-      it 'should show true when in_journey? after touching in' do
-        oyster.top_up(described_class::MAXIMUM_BALANCE)
-        oyster.touch_in(entry_station)
-        expect(oyster.in_journey?).to be true
-      end
-
     end
 
 
@@ -95,19 +96,11 @@ describe Oystercard do
         expect(oyster.entry_station).to eq nil
       end
 
-      it 'should record one journey' do
-        expect(oyster.journeys).to include journey
-      end
+
 
     end
 
 
-    context "#journeys" do
 
-      it 'should start off as an empty array' do
-        expect(oyster.journeys).to eq []
-      end
-
-    end
 
 end
