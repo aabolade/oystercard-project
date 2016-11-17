@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+-fd
+--color
+--require spec_helper
+=======
 --color
 --require spec_helper
 -fd
+>>>>>>> c4f4c5d2e20e9beefbc6d8252e91a472ad370c39

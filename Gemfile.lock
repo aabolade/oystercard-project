@@ -22,8 +22,11 @@ PLATFORMS
 DEPENDENCIES
   rspec
 
+<<<<<<< HEAD
+=======
 RUBY VERSION
    ruby 2.3.0p0
 
+>>>>>>> c4f4c5d2e20e9beefbc6d8252e91a472ad370c39
 BUNDLED WITH
    1.13.6
