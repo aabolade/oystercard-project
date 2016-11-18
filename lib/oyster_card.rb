@@ -51,5 +51,4 @@ attr_reader :balance, :journey
   end
 
 
-
 end
