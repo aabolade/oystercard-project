@@ -2,25 +2,13 @@ class Journey
 MINIMUM_FARE = 1
 PENALTY_FARE = 6
 
-  attr_reader :journeys, :current_journey, :entry_station, :exit_station
+  attr_reader :current_journey
+  attr_accessor :entry_station, :exit_station
 
   def initialize
-  @journeys = []
   @current_journey = {}
   @entry_station
   @exit_station
-  end
-
-  def start_a_journey(station)
-    @entry_station = station
-    @current_journey[:entry] = @entry_station
-  end
-
-  def finish_a_journey(station)
-      @current_journey[:exit] = station
-      @journeys << @current_journey
-      @entry_station = nil
-      station
   end
 
   def is_journey_complete?
