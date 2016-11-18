@@ -1,5 +1,6 @@
 class Journey
 MINIMUM_FARE = 1
+PENALTY_FARE = 6
 
   attr_reader :journeys, :current_journey
 
@@ -22,18 +23,17 @@ MINIMUM_FARE = 1
     @exit_station = station
     @current_journey[:exit] = @exit_station
     @journeys << @current_journey
+    @current_journey = {}
     @exit_station
-
-
   end
 
 
 
 
 
-  # def calculating_fare(balance)
-  #   @balance = balance
-  #     @balance -= MINIMUM_FARE
-  # end
+  def fare
+    return MINIMUM_FARE if @current_journey.empty?
+    PENALTY_FARE
+  end
 
 end
