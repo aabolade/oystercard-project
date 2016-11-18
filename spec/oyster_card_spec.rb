@@ -34,11 +34,6 @@ describe Oystercard do
 
     context "deducting fares" do
 
-      it 'should deduct money from the card' do
-        oyster.top_up(15)
-        oyster.deduct(10)
-        expect(oyster.balance).to eq 5
-      end
 
       it 'complete journey should deduct a minimum charge from the card' do
         card = Oystercard.new
@@ -61,8 +56,11 @@ describe Oystercard do
         expect{ oyster.touch_in(entry_station) }.to raise_error "Card cannot be touched in: below £#{described_class::MINIMUM_BALANCE}"
       end
 
-
-
+      it "should charge a penalty fare if we touch in without completing our previous journey" do
+        oyster.top_up(10)
+        oyster.touch_in(entry_station)
+        expect{oyster.touch_in(entry_station)}.to change{oyster.balance}.by -Journey::PENALTY_FARE
+      end
     end
 
 
@@ -86,11 +84,6 @@ describe Oystercard do
         expect(oyster.in_journey?).to be false
       end
 
-
-
     end
-
-
-
 
 end

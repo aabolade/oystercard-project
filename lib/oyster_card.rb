@@ -23,23 +23,24 @@ attr_reader :balance, :journey
     @balance += amount
   end
 
-  def deduct(amount)
-    @balance -= amount
-  end
-
-  def touch_in(xyz)
+  def touch_in(station)
     fail "Card cannot be touched in: below £#{MINIMUM_BALANCE}" if minimum_balance?
-    journey.start_a_journey(xyz)
-    xyz
+    deduct(journey.deduct_penalty_fare) if in_journey?
+    journey.start_a_journey(station)
+    station
   end
 
-  def touch_out(abc)
+  def touch_out(station)
     deduct(journey.fare)
-    journey.finish_a_journey(abc)
-    abc
+    journey.finish_a_journey(station)
+    station
   end
 
   private
+
+  def deduct(amount)
+    @balance -= amount
+  end
 
   def maximum_balance?(amount)
     @balance + amount > MAXIMUM_BALANCE
@@ -48,5 +49,7 @@ attr_reader :balance, :journey
   def minimum_balance?
     balance < MINIMUM_BALANCE
   end
+
+
 
 end

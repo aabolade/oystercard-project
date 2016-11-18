@@ -27,6 +27,10 @@ PENALTY_FARE = 6
       entry_station.nil?
   end
 
+  def deduct_penalty_fare
+    PENALTY_FARE
+  end
+
   def fare
     return PENALTY_FARE if is_journey_complete?
     MINIMUM_FARE
