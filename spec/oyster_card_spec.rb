@@ -32,7 +32,6 @@ describe Oystercard do
 
     end
 
-
     context "deducting fares" do
 
       it 'should deduct money from the card' do
