@@ -7,10 +7,12 @@ PENALTY_FARE = 6
   def initialize
   @journeys = []
   @current_journey = {}
+  @entry_station
+  @exit_station
   end
 
-  def finish?
-    @current_journey.length % 2 != 0
+  def is_journey_complete?
+    @entry_station == nil
   end
 
   def start_a_journey(station)
@@ -20,11 +22,10 @@ PENALTY_FARE = 6
   end
 
   def finish_a_journey(station)
-    @exit_station = station
-    @current_journey[:exit] = @exit_station
-    @journeys << @current_journey
-    @current_journey = {}
-    @exit_station
+      @current_journey[:exit] = station
+      @journeys << @current_journey
+      @entry_station = nil
+      station
   end
 
 
@@ -32,8 +33,8 @@ PENALTY_FARE = 6
 
 
   def fare
-    return MINIMUM_FARE if @current_journey.empty?
-    PENALTY_FARE
+    return PENALTY_FARE if is_journey_complete?
+    MINIMUM_FARE
   end
 
 end

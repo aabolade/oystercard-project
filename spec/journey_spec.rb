@@ -42,7 +42,7 @@ describe Journey do
     it 'should record one journey' do
       journey.start_a_journey(entry_station)
       journey.finish_a_journey(exit_station)
-      expect(journey.journeys).to include {:entry => entry_station, :exit => exit_station}
+      expect(journey.journeys).to include({:entry => entry_station, :exit => exit_station})
       end
   end
 
@@ -55,8 +55,8 @@ describe Journey do
       expect(journey.fare).to eq Journey::MINIMUM_FARE
     end
 
-    it "should return a penalty fare when you touch in without a touch out" do
-      journey.start_a_journey(entry_station)
+    it "should return a penalty fare when you touch out without a touch in" do
+      journey.finish_a_journey(entry_station)
       expect(journey.fare).to eq Journey::PENALTY_FARE
     end
 
