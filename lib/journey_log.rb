@@ -2,7 +2,7 @@ class JourneyLog
 
   attr_reader :journey, :journeys
 
-  def initialize(journey_klass)
+  def initialize(journey_klass = Journey)
     @journey = journey_klass.new
     @journeys = []
   end

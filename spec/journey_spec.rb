@@ -3,8 +3,6 @@ require 'oyster_card'
 
 describe Journey do
 
-    it {is_expected.to respond_to :start_a_journey}
-    it {is_expected.to respond_to :finish_a_journey}
     let (:entry_station) {double :entry_station}
     let (:exit_station) {double :exit_station}
     let (:journey) {described_class.new}
