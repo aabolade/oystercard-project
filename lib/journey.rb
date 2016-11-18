@@ -2,7 +2,7 @@ class Journey
 MINIMUM_FARE = 1
 PENALTY_FARE = 6
 
-  attr_reader :journeys, :current_journey
+  attr_reader :journeys, :current_journey, :entry_station, :exit_station
 
   def initialize
   @journeys = []
@@ -11,14 +11,9 @@ PENALTY_FARE = 6
   @exit_station
   end
 
-  def is_journey_complete?
-    @entry_station == nil
-  end
-
   def start_a_journey(station)
     @entry_station = station
     @current_journey[:entry] = @entry_station
-
   end
 
   def finish_a_journey(station)
@@ -28,9 +23,9 @@ PENALTY_FARE = 6
       station
   end
 
-
-
-
+  def is_journey_complete?
+      entry_station.nil?
+  end
 
   def fare
     return PENALTY_FARE if is_journey_complete?

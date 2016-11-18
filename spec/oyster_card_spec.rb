@@ -61,11 +61,7 @@ describe Oystercard do
         expect{ oyster.touch_in(entry_station) }.to raise_error "Card cannot be touched in: below £#{described_class::MINIMUM_BALANCE}"
       end
 
-      it 'should remember the entry station' do
-        oyster.top_up(described_class::MINIMUM_BALANCE)
-        oyster.touch_in(entry_station)
-        expect(oyster.entry_station).to eq entry_station
-      end
+
 
     end
 
@@ -88,10 +84,6 @@ describe Oystercard do
 
       it 'should show false when in_journey? after touching out' do
         expect(oyster.in_journey?).to be false
-      end
-
-      it 'should return nil after touching out' do
-        expect(oyster.entry_station).to eq nil
       end
 
 
